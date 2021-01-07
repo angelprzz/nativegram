@@ -1,6 +1,6 @@
 # Nativegram
 
-**Instagram clone built with React Native.**
+**Instagram clone built with React Native & Firebase.**
 
 
 ⚠ This project is still in progress. Feel free to clone the project if you want to continue the development of this app on your own.
