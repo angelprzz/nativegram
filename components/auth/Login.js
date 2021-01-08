@@ -9,10 +9,10 @@ const Login = () => {
     password: "",
   };
 
-  const [state, setState] = useState(initialState);
+  const [formState, setFormState] = useState(initialState);
 
   function login() {
-    const { email, password } = state;
+    const { email, password } = formState;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -29,22 +29,22 @@ const Login = () => {
       <TextInput
         placeholder="email"
         onChangeText={(email) =>
-          setState((currentValue) => ({
+          setFormState((currentValue) => ({
             ...currentValue,
             email,
           }))
         }
-        value={state.email}
+        value={formState.email}
       />
       <TextInput
         placeholder="password"
         onChangeText={(password) =>
-          setState((currentValue) => ({
+          setFormState((currentValue) => ({
             ...currentValue,
             password,
           }))
         }
-        value={state.password}
+        value={formState.password}
       />
 
       <Button onPress={() => login()} title="Login" />

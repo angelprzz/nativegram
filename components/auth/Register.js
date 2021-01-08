@@ -10,10 +10,10 @@ const Register = () => {
     password: "",
   };
 
-  const [state, setState] = useState(initialState);
+  const [formState, setFormState] = useState(initialState);
 
   function register() {
-    const { email, password, name } = state;
+    const { email, password, name } = formState;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -30,32 +30,32 @@ const Register = () => {
       <TextInput
         placeholder="name"
         onChangeText={(name) =>
-          setState((currentValue) => ({
-            ...currentValue,
+          setFormState((currentState) => ({
+            ...currentState,
             name,
           }))
         }
-        value={state.name}
+        value={formState.name}
       />
       <TextInput
         placeholder="email"
         onChangeText={(email) =>
-          setState((currentValue) => ({
-            ...currentValue,
+          setFormState((currentState) => ({
+            ...currentState,
             email,
           }))
         }
-        value={state.email}
+        value={formState.email}
       />
       <TextInput
         placeholder="password"
         onChangeText={(password) =>
-          setState((currentValue) => ({
-            ...currentValue,
+          setFormState((currentState) => ({
+            ...currentState,
             password,
           }))
         }
-        value={state.password}
+        value={formState.password}
       />
 
       <Button onPress={() => register()} title="Register" />
