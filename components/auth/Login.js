@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { View, Button, TextInput } from "react-native";
 
 import firebase from "firebase";
-import firebaseConfig from "../../config";
 
-const RegisterScreen = () => {
-  const [state, setState] = useState({
-    name: "",
+const Login = () => {
+  const initialState = {
     email: "",
     password: "",
-  });
+  };
 
-  function register() {
-    const { email, password, name } = state;
+  const [state, setState] = useState(initialState);
+
+  function login() {
+    const { email, password } = state;
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
       })
@@ -26,16 +26,6 @@ const RegisterScreen = () => {
 
   return (
     <View>
-      <TextInput
-        placeholder="name"
-        onChangeText={(name) =>
-          setState((currentValue) => ({
-            ...currentValue,
-            name,
-          }))
-        }
-        value={state.name}
-      />
       <TextInput
         placeholder="email"
         onChangeText={(email) =>
@@ -57,9 +47,9 @@ const RegisterScreen = () => {
         value={state.password}
       />
 
-      <Button onPress={() => register()} title="Register" />
+      <Button onPress={() => login()} title="Login" />
     </View>
   );
 };
 
-export default RegisterScreen;
+export default Login;
