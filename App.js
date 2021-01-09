@@ -15,6 +15,7 @@ import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
 import HomeScreen from "./components/Home";
 import AddScreen from "./components/main/Add";
+import SaveScreen from "./components/main/Save";
 
 import rootReducer from "./store/reducers";
 
@@ -27,7 +28,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const Stack = createStackNavigator();
 
-function App() {
+function App(props) {
   const [isLoaded, setLoaded] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -76,7 +77,12 @@ function App() {
             component={HomeScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="Add" component={AddScreen} />
+          <Stack.Screen
+            name="Add"
+            component={AddScreen}
+            navigation={props.navigation}
+          />
+          <Stack.Screen name="Save" component={SaveScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
