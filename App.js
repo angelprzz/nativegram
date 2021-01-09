@@ -68,7 +68,15 @@ function App() {
 
   return (
     <Provider store={store}>
-      <HomeScreen />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Landing">
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }
