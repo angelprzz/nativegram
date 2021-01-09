@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -8,14 +8,18 @@ import FeedScreen from "./main/Feed";
 import AddScreen from "./main/Add";
 import ProfileScreen from "./main/Profile";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
+const EmptyScreen = () => {
+  return null;
+};
 
 function Home() {
   const user = useSelector((store) => store.currentUser);
   const dispatch = useDispatch();
   console.log(user);
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Feed" labeled={false}>
       <Tab.Screen
         name="Feed"
         component={FeedScreen}
@@ -26,8 +30,14 @@ function Home() {
         }}
       />
       <Tab.Screen
-        name="Add"
-        component={AddScreen}
+        name="AddContainer"
+        component={EmptyScreen}
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault();
+            navigation.navigate("Add");
+          },
+        })}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="plus-box" color={color} size={26} />

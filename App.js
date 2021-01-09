@@ -14,6 +14,7 @@ import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
 import HomeScreen from "./components/Home";
+import AddScreen from "./components/main/Add";
 
 import rootReducer from "./store/reducers";
 
@@ -75,6 +76,7 @@ function App() {
             component={HomeScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="Add" component={AddScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
