@@ -3,20 +3,30 @@ import { View, Text } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+
 import firebase from "firebase";
 
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
+import HomeScreen from "./components/Home";
+
+import rootReducer from "./store/reducers";
 
 import firebaseConfig from "./config";
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 const Stack = createStackNavigator();
 
-export default function App() {
+function App() {
   const [isLoaded, setLoaded] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
 
@@ -57,8 +67,10 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
-      <Text>User is logged in</Text>
-    </View>
+    <Provider store={store}>
+      <HomeScreen />
+    </Provider>
   );
 }
+
+export default App;
