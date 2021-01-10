@@ -16,8 +16,7 @@ const EmptyScreen = () => {
 
 function Home() {
   const user = useSelector((store) => store.currentUser);
-  const dispatch = useDispatch();
-  console.log(user);
+  const posts = useSelector((store) => store.posts);
   return (
     <Tab.Navigator initialRouteName="Feed" labeled={false}>
       <Tab.Screen
