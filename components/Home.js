@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FeedScreen from "./main/Feed";
 import ProfileScreen from "./main/Profile";
 
-import { fetchUser } from "../store/actions/index";
+import { fetchUser, fetchUserPosts } from "../store/actions/index";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -16,11 +16,13 @@ const EmptyScreen = () => {
 };
 
 const Home = () => {
-  const user = useSelector((store) => store.userState.currentUser);
+  const currentUser = useSelector((store) => store.userState.currentUser);
+  const posts = useSelector((store) => store.userState.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUser());
+    dispatch(fetchUserPosts());
   }, [dispatch]);
 
   return (
