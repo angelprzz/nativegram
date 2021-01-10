@@ -82,7 +82,11 @@ function App(props) {
             component={AddScreen}
             navigation={props.navigation}
           />
-          <Stack.Screen name="Save" component={SaveScreen} />
+          <Stack.Screen
+            name="Save"
+            component={SaveScreen}
+            navigation={props.navigation}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
