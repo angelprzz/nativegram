@@ -5,8 +5,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useSelector, useDispatch } from "react-redux";
 
 import FeedScreen from "./main/Feed";
-import AddScreen from "./main/Add";
 import ProfileScreen from "./main/Profile";
+
+import { fetchUser } from "../store/actions/index";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -14,9 +15,14 @@ const EmptyScreen = () => {
   return null;
 };
 
-function Home() {
-  const user = useSelector((store) => store.currentUser);
-  const posts = useSelector((store) => store.posts);
+const Home = () => {
+  const user = useSelector((store) => store.userState.currentUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
   return (
     <Tab.Navigator initialRouteName="Feed" labeled={false}>
       <Tab.Screen
@@ -58,6 +64,6 @@ function Home() {
       />
     </Tab.Navigator>
   );
-}
+};
 
 export default Home;
