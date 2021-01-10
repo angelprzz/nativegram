@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import FeedScreen from "./main/Feed";
 import ProfileScreen from "./main/Profile";
+import SearchScreen from "./main/Search";
 
 import { fetchUser, fetchUserPosts } from "../store/actions/index";
 
@@ -15,7 +16,7 @@ const EmptyScreen = () => {
   return null;
 };
 
-const Home = () => {
+const Home = (props) => {
   const currentUser = useSelector((store) => store.userState.currentUser);
   const posts = useSelector((store) => store.userState.posts);
   const dispatch = useDispatch();
@@ -33,6 +34,16 @@ const Home = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        navigation={props.navigation}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="magnify" color={color} size={26} />
           ),
         }}
       />

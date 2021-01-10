@@ -72,11 +72,7 @@ function App(props) {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen
             name="Add"
             component={AddScreen}
