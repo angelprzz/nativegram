@@ -12,6 +12,7 @@ const Profile = (props) => {
 
   const currentUser = useSelector((store) => store.userState.currentUser);
   const posts = useSelector((store) => store.userState.posts);
+  const following = useSelector((store) => store.userState.following);
 
   useEffect(() => {
     if (props.route.params.uid === firebase.auth().currentUser.uid) {
@@ -46,7 +47,12 @@ const Profile = (props) => {
           setUserPosts(posts);
         });
     }
-  }, [props.route.params.uid]);
+    if (following.indexOf(props.route.params.uid) > -1) {
+      setIsFollowing(true);
+    } else {
+      setIsFollowing(false);
+    }
+  }, [props.route.params.uid, following]);
 
   const onFollow = () => {
     firebase

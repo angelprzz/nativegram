@@ -10,7 +10,11 @@ import FeedScreen from "./main/Feed";
 import ProfileScreen from "./main/Profile";
 import SearchScreen from "./main/Search";
 
-import { fetchUser, fetchUserPosts } from "../store/actions/index";
+import {
+  fetchUser,
+  fetchUserPosts,
+  fetchUsersFollowing,
+} from "../store/actions/index";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -21,11 +25,13 @@ const EmptyScreen = () => {
 const Home = (props) => {
   const currentUser = useSelector((store) => store.userState.currentUser);
   const posts = useSelector((store) => store.userState.posts);
+  const following = useSelector((store) => store.userState.following);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(fetchUserPosts());
+    dispatch(fetchUsersFollowing());
   }, [dispatch]);
 
   return (
