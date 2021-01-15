@@ -14,6 +14,7 @@ import {
   fetchUser,
   fetchUserPosts,
   fetchUsersFollowing,
+  clearData,
 } from "../store/actions/index";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -26,9 +27,11 @@ const Home = (props) => {
   const currentUser = useSelector((store) => store.userState.currentUser);
   const posts = useSelector((store) => store.userState.posts);
   const following = useSelector((store) => store.userState.following);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearData());
     dispatch(fetchUser());
     dispatch(fetchUserPosts());
     dispatch(fetchUsersFollowing());
