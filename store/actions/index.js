@@ -79,12 +79,14 @@ export function fetchUsersData(uid) {
           if (snapshot.exists) {
             let user = snapshot.data();
             user.uid = snapshot.id;
+            console.log("user fetched");
+            console.log(user);
 
             dispatch({
               type: USERS_DATA_STATE_CHANGE,
               user,
             });
-            dispatch(fetchUsersFollowingPosts(user.id));
+            dispatch(fetchUsersFollowingPosts(user.uid));
           } else {
             console.log("User does not exist");
           }
@@ -103,17 +105,21 @@ export function fetchUsersFollowingPosts(uid) {
       .orderBy("creation", "asc")
       .get()
       .then((snapshot) => {
-        const user = getState().usersState.users.find(
-          (element) => element.uid === uid
-        );
+        console.log("getState().usersState.users");
+        console.log(getState().usersState.users);
+        const user = getState().usersState.users.find((el) => el.uid === uid);
 
         let posts = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
           return { id, ...data, user };
         });
+        console.log("postsd");
         console.log(posts);
+        console.log("uid");
+        console.log(uid);
         dispatch({ type: USERS_POSTS_STATE_CHANGE, posts, uid });
+        console.log("getState()");
         console.log(getState());
       });
   };

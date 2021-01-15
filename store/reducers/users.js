@@ -13,7 +13,7 @@ export const users = (state = initialState, action) => {
     case USERS_DATA_STATE_CHANGE:
       return {
         ...state,
-        currentUser: [...state.users, action.user],
+        users: [...state.users, action.user],
       };
     case USERS_POSTS_STATE_CHANGE:
       return {
@@ -23,6 +23,7 @@ export const users = (state = initialState, action) => {
           user.uid === action.uid ? { ...user, posts: action.posts } : user
         ),
       };
+
     default:
       return state;
   }
