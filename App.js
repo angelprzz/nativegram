@@ -16,6 +16,7 @@ import LoginScreen from "./components/auth/Login";
 import HomeScreen from "./components/Home";
 import AddScreen from "./components/main/Add";
 import SaveScreen from "./components/main/Save";
+import CommentsScreen from "./components/main/Comments";
 
 import rootReducer from "./store/reducers";
 
@@ -81,6 +82,11 @@ function App(props) {
           <Stack.Screen
             name="Save"
             component={SaveScreen}
+            navigation={props.navigation}
+          />
+          <Stack.Screen
+            name="Comments"
+            component={CommentsScreen}
             navigation={props.navigation}
           />
         </Stack.Navigator>

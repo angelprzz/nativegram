@@ -5,7 +5,7 @@ import firebase from "firebase";
 
 import { useSelector, useDispatch } from "react-redux";
 
-const Feed = () => {
+const Feed = (props) => {
   const [posts, setPosts] = useState([]);
 
   const currentUser = useSelector((store) => store.userState.currentUser);
@@ -42,6 +42,16 @@ const Feed = () => {
             <View style={styles.containerImage}>
               <Text style={styles.container}>{item.user.name}</Text>
               <Image style={styles.image} source={{ uri: item.downloadURL }} />
+              <Text
+                onPress={() =>
+                  props.navigation.navigate("Comments", {
+                    postId: item.id,
+                    uid: item.user.uid,
+                  })
+                }
+              >
+                View Comments...
+              </Text>
             </View>
           )}
         />
