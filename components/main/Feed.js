@@ -11,11 +11,13 @@ const Feed = (props) => {
   const currentUser = useSelector((store) => store.userState.currentUser);
   const following = useSelector((store) => store.userState.following);
   const users = useSelector((store) => store.usersState.users);
-  const usersLoaded = useSelector((store) => store.usersState.usersLoaded);
+  const usersFollowingLoaded = useSelector(
+    (store) => store.usersState.usersFollowingLoaded
+  );
 
   useEffect(() => {
     let posts = [];
-    if (usersLoaded == following.length) {
+    if (usersFollowingLoaded == following.length) {
       for (let i = 0; i < following.length; i++) {
         const user = users.find((el) => el.uid === following[i]);
         if (user != undefined) {
@@ -29,7 +31,7 @@ const Feed = (props) => {
 
       setPosts(posts);
     }
-  }, [usersLoaded]);
+  }, [usersFollowingLoaded]);
 
   return (
     <View style={styles.container}>
