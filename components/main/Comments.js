@@ -29,6 +29,20 @@ const Comments = (props) => {
     }
   }, [props.route.params.postId]);
 
+  const onCommentSend = () => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(props.route.params.uid)
+      .collection("userPosts")
+      .doc(props.route.params.postId)
+      .collection("comments")
+      .add({
+        creator: firebase.auth().currentUser.uid,
+        text,
+      });
+  };
+
   return (
     <View>
       <FlatList
@@ -41,6 +55,13 @@ const Comments = (props) => {
           </View>
         )}
       />
+      <View>
+        <TextInput
+          placeholder="Add a comment..."
+          onChangeText={(text) => setText(text)}
+        />
+        <Button onPress={() => onCommentSend()} title="Send" />
+      </View>
     </View>
   );
 };
