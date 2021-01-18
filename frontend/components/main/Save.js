@@ -13,7 +13,6 @@ export default function Save(props) {
     const childPath = `post/${
       firebase.auth().currentUser.uid
     }/${Math.random().toString(36)}`;
-    console.log(childPath);
 
     const response = await fetch(uri);
     const blob = await response.blob();
@@ -27,7 +26,6 @@ export default function Save(props) {
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
         savePostData(snapshot);
-        console.log(snapshot);
       });
     };
 
