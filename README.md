@@ -11,7 +11,7 @@
 
 **Inside the `backend` folder:**
 
-4. Link the Firebase Functions code with your Firebase project (you will have to upgrade to the **Blaze* plan to be able to use Firebase Functions).
+4. Link the Firebase Functions code with your Firebase project (you will have to upgrade to the **Blaze** plan to be able to use Firebase Functions).
 
 **Inside the `frontend` folder:**
 
